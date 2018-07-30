@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notifications</title>
+    <?php require_once('header.php'); ?>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <!-- link href="css/higher_manage.css" rel="stylesheet" type="text/css" -->
+  <link href="css/theme.css" rel="stylesheet" type="text/css">
+   <script src="<?php echo base_url(); ?>js/my.js"></script>
+
+
+</head> 
+<body>
+    <div class="main">
+        <div class="mtop">
+            <div class="mbar">
+            <!-- button class="btn btn-success" style="margin:8px; margin-right: 0px; "  type="button" onClick="location.href = 'home_page';" >Home</button -->
+            <button class="btn btn-info"  type="button" style="margin: 8px; " onClick="location.href = 'common_notification_page';">Notifications <span class="badge"><?php print_r($num); ?>      </span></button>
+            
+            <div class="lobtn">
+            
+                <button class="btn btn-default" type="button" onClick="location.href = 'resetPassword';">Change Password</button>
+                <button class="userPicture btn btn-default" type="button" onClick="location.href = 'empHomepage/<?php echo $this->session->userdata('UserId'); ?>';"><img src="<?php echo base_url(); ?>images/ProfilePictures/<?php echo $this->session->userdata('UserId'); ?>.jpg" alt="profilePicture" width="22" height="22" style="float:left;"><?php echo $this->session->userdata('UserName'); ?></button>
+          <button class="btn btn-default" type="button" onClick="location.href = 'logout';" ><img src="<?php echo base_url(); ?>images/powerbtn.png" width="12" height="15" /> Logout</button>
+                
+                <!-- here notifications are coming -->
+        </div>  <!-- end of mbar -->
+        
+            <div class="panel panel-success" style="position:relative; width:1100px">
+                <div class="panel-heading" >
+                <h3 class="panel-title">Notifications </h3>
+                </div>
+                <div class="panel-body">
+                            <?php  
+                                        
+                                        foreach ($noti as $row) {
+                                           //cho $row->Rto.'';
+                                             echo '<div class="alert alert-info" role="alert" >';
+
+                                            echo '<strong> <a href="url">';
+                                            echo $row->Rtoo.'';
+                                            echo '</a>';
+                                            echo ' is ';
+                                            //echo '<a href="url">';
+                                            if( $row->Message === 'Accepted'){
+
+                                              echo '<font color="green">';
+                                            }
+
+                                            else{
+                                              echo '<font color="red">';
+                                            }
+                                            echo $row->Message.'';
+
+                                            echo '</font>';
+                                            echo ' By ';
+                                             echo '<a href="url">';
+                                            echo $row->Nfrom.'';
+                                            echo '</a>';
+                                            echo '<form action="unview_notification" method="post">
+                                                      <input type="hidden" name="UserId" value="'.$row->Rto.'"></input>';
+                                            echo '<button style="float:right; position:relative; top:-18px" class="close" type="submit" >X</button>';
+                                            echo '</form>';
+                                            echo '</strong>';
+                                            echo '</div>';
+                                            //echo '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>   href="unview_notification"';
+
+                                        }
+                                        ?>
+
+                                         <?php
+
+                                       
+                                        $count = 0;
+                                        foreach ($notification as $row) {
+                                            echo '<div class="alert alert-info" role="alert" >';
+                                            echo '<strong> <a href="url">';
+                                            echo $row->ToName.' ';
+                                          
+                                            echo '</a>';
+                                            echo 'is requested by <a href="url">';
+                                            echo $row->fromname.'';
+                                            echo '</a>';
+                                            echo ', for <a href="url">';
+                                            echo $row->proname.' ';
+                                            echo '</a>';
+                                            echo 'project at <a href="url">';
+                                            echo $row->teamname.' ';
+                                            echo '</a> as ';
+                                            echo $row->Role.' ';
+                                            echo '</strong><br /> from ';
+                                            echo $row->stardate.' ';
+                                            echo 'to ';
+                                            echo $row->endDate.' ';
+                                           // echo '</br>';
+                                            echo '"';
+                                            echo $row->Comment.' ';
+                                             echo '"';
+                                            echo '<div style="float:right; width: 300px; position: relative; top:-45px ">';
+                                            
+                                            
+                                           echo 
+                                            
+                                                    '<span class="relativetime"  style="position: relative;  float:left; top:32px;">'.$row->reqDate.'</span>';
+                                                    
+                                          }  
+                                                    
+                                            
+                                                          ?>
+                </div>
+           </div>      
+             
+        <?php require_once('footer.php');?> 
+    </div>
+</body>
+</html>

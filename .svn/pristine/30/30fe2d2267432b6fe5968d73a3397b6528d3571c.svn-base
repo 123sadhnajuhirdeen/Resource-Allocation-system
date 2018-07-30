@@ -1,0 +1,41 @@
+<?php require_once('header.php');
+
+?>
+  	<!-- div align="center" -->
+        <div class="main">
+            <div class="mtop">
+    	
+		<div class="blank" >
+        		<img src="<?php echo base_url(); ?>Images/login.png" style="position: relative; float: left; top: 30px; left:20%;">
+                              
+                        <form action='login_validation' class="form-signin" style="position: relative; top: 40px; float: left; left:20%; width: 300px;"role="form" method="post"  >
+                          <div align="left">
+                              <div class="form_header" style="font-size: 20px;">Login</div>
+                              <div style="height: 30px;" class="form_header"><font style="color: #FF0000;"><?php echo validation_errors();?></font></div>
+                          </div>      
+                               <label for="inputEmail" class="sr-only">Email address</label>
+                               <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                               <label for="inputPassword" class="sr-only">Password</label>
+                               <input style="top:5px;" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                   
+                          <div align="left">
+                                <div class="checkbox">
+                                      <label>
+                                       <input type="checkbox" value="remember-me"> Remember me
+                                      </label>
+                                </div>        
+                          </div>
+                          <!--button class="btn btn-lg btn-primary btn-block" type="submit">Login</button-->
+                          <input class="btn btn-lg btn-primary btn-block" type='Submit' value='Login' />
+                            <a href="resetPassword" style="">Forgot Your Password</a>
+                       	</form>
+                      	
+
+		</div> <!-- end of blank -->
+       
+               <?php require_once('footer.php');?>
+       
+            </div>
+        </div>
+  </body>
+</html>

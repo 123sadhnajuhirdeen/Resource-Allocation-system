@@ -1,0 +1,221 @@
+@charset "utf-8";
+/* CSS Document */
+
+.bg1 {
+	background-image:url(../images/background1.jpg) ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+     /*   background-attachment: fixed;
+      /*  background-position: center; */
+}
+.main {
+	top:100px;
+	width:100%;
+	position:absolute;
+	
+}
+.main2 {
+	
+	width:100%;
+	position:absolute;
+	
+}
+
+.blank{
+	height: 350px;	
+	background: rgba(255,255,255,0.5);
+	width: 1100px;
+	border-radius: 8px;
+	border: thin;	
+	text-align: center;	
+        margin-bottom: 20px
+}
+/*.animations {
+	    animation: myfirst 1s;
+		-webkit-animation: myfirst 1s; /* Chrome, Safari, Opera *//*
+}
+@keyframes myfirst {
+    0%   { width:0%;}
+    100% { width:90%;}
+}
+@-webkit-keyframes myfirst {
+    0%   { width:0%;}
+    100% { width:90%;}
+}*/
+.mtop {
+	
+/*	background: rgba(255,255,255,0.5);
+	border: 2px solid #999999 opacity .5;
+	border-radius: 10px;
+	
+	box-shadow: 10px 10px 5px rgba(211,219,115,0.5);*/
+	width: 1100px;
+	margin-right: auto;
+	margin-left: auto;
+	position:relative;
+/*	height:1000px;*/
+}
+.proimg {
+/*
+	border-width:5px;	
+    border-style:groove;*/
+}
+.mbottom {
+	position: relative;
+	float: left;
+	width:100%;
+	
+}
+.footer	{
+	text-align: center;
+	width: 1100px;
+	height: 40px;
+	top: 0px;
+	background: rgba(255,255,255,0.5);
+	border: 2px solid #999999 opacity .5;
+	border-radius: 4px;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	float:left;
+	padding-top:10px;
+
+}
+.title1 {
+	margin-left: auto;
+	margin-right: auto;
+}
+.propic {
+/*	width: 200px;
+	height: 310px;*/
+	position: relative;
+	
+	top: 5%;
+	/*left: 25px;*/
+	float: left;
+}
+.personalDetails {
+	background:rgba(255,255,255,0.5);
+/*	border: 2px solid #999999;
+	border-radius: 10px;*/
+	width: 430px;
+	position: relative;
+	top: 5%;
+	left: 17px;
+	min-height: 209px;
+	float: left;
+}
+.ProjectDetails {
+	background:rgba(255,255,255,0.5);
+/*	border: 2px solid #999999;
+	border-radius: 10px;*/
+	width: 430px;
+	position: relative;
+	top: 5%;
+	left: 35px;
+	min-height: 209px;
+	float: left;
+}
+.skillDetails {
+	background:rgba(255,255,255,0.5);
+/*	border: 2px solid #999999;
+	border-radius: 10px;*/
+	width: 540px;
+	position: relative;
+/*	left:25px;*/
+	float: left;
+	min-height:280px;
+}
+
+.expDetails {
+	background: rgba(255,255,255,0.5);
+	/*	border: 2px solid #999999;
+	border-radius: 10px;*/
+	width: 543px;
+	position: relative;
+	left: 20px;
+	min-height: 280px;
+	float: left;
+	padding-bottom: 10px;
+}
+
+
+
+.logo {
+        width: 243px;
+	top:10px;
+	margin-right: auto;
+	margin-left: auto;
+	position:relative;
+
+}
+.udata {
+	left: 2%;
+	width: 35%;
+	float: left;
+	position: relative;
+}
+.uinfo {
+	left: 25px;
+	position: relative;
+	float: left;
+	width: 60%;
+}
+.colan {
+	right: 5%;
+	float:right;
+	position: relative;
+}
+.label01 {
+	height: 35px;
+	padding-right:5px;
+	/*padding-bottom:5px;*/
+	position:relative;
+	float:left;
+}
+.label02 {
+	height: 25px;
+	padding-right:5px;
+	/*padding-bottom:5px;*/
+	position:relative;
+	float:left;
+}
+.mbar {
+	width: 1100px;
+	height: 50px;
+	background: rgba(255,255,255,0.5);
+	border-radius: 4px;
+	margin-bottom:20px;
+}
+.lobtn {
+        margin:8px;
+	float:right;
+	
+}
+.userPicture {
+	position: relative;
+	background-color:#FFF;	
+	height:34px;
+	min-width: 100px;
+	padding:5px;	
+	border-radius: 4px;
+	/*float:left;
+	margin-right:4px;*/
+}
+
+.animations {
+	    animation: myfirst 1s;
+		-webkit-animation: myfirst 1s; /* Chrome, Safari, Opera */
+}
+@keyframes myfirst {
+    0%   {width:0%;}
+    100% {width:100% 502px;}
+}
+@-webkit-keyframes myfirst {
+    0%   {width:0%;}
+    100% {width:100% 502px;}
+}

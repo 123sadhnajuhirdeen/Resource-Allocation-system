@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notifications</title>
+    <?php require_once('header.php'); ?>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <!-- link href="css/higher_manage.css" rel="stylesheet" type="text/css" -->
+  <link href="css/theme.css" rel="stylesheet" type="text/css">
+   <script src="<?php echo base_url(); ?>js/my.js"></script>
+
+
+</head> 
+<body>
+    <div class="main">
+        <div class="mtop">
+            <div class="mbar">
+            <button class="btn btn-success" style="margin:8px; margin-right: 0px; "  type="button" onClick="location.href = 'home_page';" >Home</button>
+            <button class="btn btn-default"  type="button" onClick="location.href = 'employeePool';">Employee Pool </button>
+            <button class="btn btn-default" type="button" onClick="location.href = 'viewEmployees';">Employees </button>
+            <button class="btn btn-info"  type="button" onClick="location.href = 'requestHandling2';">Notifications <span class="badge">4</span></button>
+            <div class="lobtn">
+            <button class="btn btn-default" type="button" onClick="location.href = 'resetPassword';">Change Password</button>
+                <button class="userPicture btn btn-default" type="button" onClick="location.href = 'empHomepage';"><img src="<?php echo base_url(); ?>images/ProfilePictures/<?php echo $this->session->userdata('UserId'); ?>.jpg" alt="profilePicture" width="22" height="22" style="float:left;"><?php echo $this->session->userdata('UserName'); ?></button>
+            <button class="btn btn-default" type="button" onClick="location.href = 'logout';" ><img src="<?php echo base_url(); ?>images/powerbtn.png" width="12" height="15" /> Logout</button> </div>
+                
+                <!-- here notifications are coming -->
+        </div>  <!-- end of mbar -->
+        
+            <div class="panel panel-success" style="position:relative; width:1100px">
+                <div class="panel-heading" >
+                <h3 class="panel-title">Notifications </h3>
+                </div>
+                <div class="panel-body">
+                            <?php  
+                                        
+                                        foreach ($noti as $row) {
+                                           //cho $row->Rto.'';
+                                             echo '<div class="alert alert-info" role="alert" >';
+
+                                            echo '<strong> <a href="url">';
+                                            echo $row->Rto.'';
+                                            echo '</a>';
+                                            echo ' is ';
+                                            //echo '<a href="url">';
+                                            if( $row->Message === 'Accepted'){
+
+                                              echo '<font color="green">';
+                                            }
+
+                                            else{
+                                              echo '<font color="red">';
+                                            }
+                                            echo $row->Message.'';
+
+                                            echo '</font>';
+                                            echo ' By ';
+                                             echo '<a href="url">';
+                                            echo $row->Nfrom.'';
+                                            echo '</a>';
+                                            echo '<a style="position: relative; float:right;" class="close" href="#">X</a></strong>';
+                                            echo '</div>';
+                                            //echo '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+
+                                        }
+                                            
+                                                    
+                                            
+                                                          ?>
+                </div>
+           </div>      
+             
+        <?php require_once('footer.php');?> 
+    </div>
+</body>
+</html>

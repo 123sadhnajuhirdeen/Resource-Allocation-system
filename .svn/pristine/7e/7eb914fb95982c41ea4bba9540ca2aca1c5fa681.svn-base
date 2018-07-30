@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.footer1	{
+	text-align: center;
+	width: 705px;
+	height: 40px;
+	top: 10px;
+	background: rgba(255,255,255,0.5);
+	border: 2px solid #999999 opacity .5;
+	border-radius: 4px;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top:10px;
+
+}
+
+.main {
+	top:100px;
+	width:100%;
+	position:absolute;
+	
+}	

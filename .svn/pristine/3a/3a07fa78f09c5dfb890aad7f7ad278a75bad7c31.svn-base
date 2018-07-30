@@ -1,0 +1,448 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+
+class Main extends CI_Controller {
+	public function index()
+	{
+		//$this->login();
+            
+            
+                redirect('/index.php/main/login/', 'refresh');  
+	}
+        public function login(){
+                              
+               $this->load->library('session'); 
+               if($this->session->userdata('isLoggedIn')==='1'){
+                redirect('/index.php/main/home_page/', 'refresh');  
+                   
+               }else{
+                $this->load->view('login_page');  
+               }
+               
+        }
+        public function logOut(){
+            $this->load->library('session');           
+            $this->session->set_userdata('isLoggedIn','0');
+            redirect('index.php/main/login');
+        }
+        public function empHomepage($UserId){              
+                    $this->load->library('session'); 
+               if($this->session->userdata('isLoggedIn')==='1'){    
+                    $this->load->model('model_users');
+                    $data['skills']= $this->model_users->get_skills($UserId);
+                    $data['experiance']= $this->model_users->get_experiance($UserId);
+                    $data['cexperiance']= $this->model_users->get_current_experiance($UserId);                  
+                    $data['userInfo']= $this->model_users->get_user_info($UserId);
+                    $data['allocation']= $this->model_users->get_project_details($UserId);
+                    $data['num'] = $this->model_users->count_notificiaton();
+                    $this->load->view('employeeHome',$data);     
+               }else{
+                    $this->login();
+               }   
+        }
+        public function employeePool(){              
+                    $this->load->library('session'); 
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+                       $this->session->set_userdata('page', 'pool');
+                    $this->load->model('model_users');
+                    $data['pool']= $this->model_users->get_employee_pool(); 
+                    $data['Expire']=$this->model_users->about_to_expire_employees();
+                    $data['projects']=  $this->model_users->get_linemanager_projects();
+                    $data['num'] = $this->model_users->count_notificiaton();
+                    $this->load->view('employeePool',$data);
+               }else{
+                    $this->login();
+               }   
+        } 
+        public function viewEmployees(){
+            $this->load->library('session'); 
+             
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+                    $this->load->model('model_users');
+                    $this->session->set_userdata('page', 'viewEmployees');
+                    $data['employees']=  $this->model_users->get_team_employees();
+                    $data['num'] = $this->model_users->count_notificiaton();
+                    $data['projects']=  $this->model_users->get_linemanager_projects();
+                    $data['allemployees']=  $this->model_users->get_all_employees();
+
+
+                    $this->load->view('viewEmployees',$data); 
+               }  else {
+                   $this->login();    
+               }
+                    
+        }
+        public function add_to_project_contribution($UserId){
+       
+            $this->load->library('session'); 
+             
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+                    $this->load->model('model_users');
+                    $this->session->set_userdata('page', 'viewEmployees');
+                    $data['projects']=  $this->model_users->get_employees_project($UserId);
+                    $data['empprojects']=  $this->model_users->change_contribution($UserId);
+                    $data['user']=  $this->model_users->get_user_info($UserId);
+
+                    $this->load->view('addToProject',$data); 
+               }  else {
+                   $this->login();    
+               }
+        }        
+        public function image(){
+            //$this->load->library('session');
+            $this->load->model('model_users');
+            $this->model_users->image();
+
+        }
+
+
+        
+        public function common_notification_page(){
+                $this->load->library('session');
+                 
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+
+                $userType=$this->session->userdata('UserType');
+                if ($userType === 'Higher Management') {      
+                    $this->requestHandling();
+        
+                    
+                    
+                    
+                    
+ 
+        
+                    
+                }  
+                elseif ($userType === 'Line Manager') {
+                    $this->requestHandling2();
+                   // $this->unview_notification();
+                }
+
+                elseif ($userType === 'Employee') {
+                    $this->notification();
+                }
+                    
+               }  else {
+                   $this->login();
+               }
+
+        }
+
+        public function requestHandling(){
+                $this->load->library('session');
+                 
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+                   
+                   
+                $this->load->model("model_users");
+                
+                $data['noti'] = $this->model_users->retrieve_nofication();
+                $data['notification'] = $this->model_users->get_notification();
+                $data['num'] = $this->model_users->count_notificiaton();
+                $this->load->view("requestHandling", $data);
+                    
+               }  else {
+                   $this->login();    
+               }
+        }
+        public function requestHandling2(){
+                $this->load->library('session');
+                 
+               if($this->session->userdata('isLoggedIn')==='1'){ 
+                $this->load->model("model_users");
+                
+                
+                $data['noti'] = $this->model_users->retrieve_nofication();
+                $data['num'] = $this->model_users->count_notificiaton();
+                $this->load->view("requestHandling2", $data);
+
+               }  else {
+                   $this->login();    
+               }
+        }
+        public function notification(){
+            $this->load->library('session');
+            
+           if($this->session->userdata('isLoggedIn')==='1'){
+            $this->load->model("model_users");
+                
+                $data['notification'] = $this->model_users->get_notification();
+                $data['noti'] = $this->model_users->retrieve_nofication();
+                $data['num'] = $this->model_users->count_notificiaton();
+                $this->load->view("notification", $data);
+           }  else {
+               $this->login();    
+           }
+                
+
+        }
+        public function accept_request(){
+            $this->load->model('model_users');
+            
+            $this->model_users->accept_request();
+            //$this->common_notification_page();
+             redirect('/index.php/main/common_notification_page/', 'refresh');
+
+        
+            
+            
+           
+            
+        }
+        public function unview_notification(){
+
+            $this->load->model('model_users');
+            $this->model_users->unview_notification();
+           // $this->requestHandling2();
+            $this->load->library('session');
+            $userType=$this->session->userdata('UserType');
+                if ($userType === 'Line Manager') {      
+                    redirect('/index.php/main/requestHandling2/', 'refresh');
+                }
+
+                else{
+                    redirect('/index.php/main/notification/', 'refresh');
+                }
+        }
+        public function reject_request(){
+            $this->load->model('model_users');
+             
+            $this->model_users->reject_request();
+          //  $this->requestHandling();
+             redirect('/index.php/main/requestHandling/', 'refresh');
+          
+        }
+        public function resetPassword(){
+            
+            $this->load->library('session'); 
+            $this->load->view('resetPassword'); 
+        }
+        public function middleManagementHomepage(){
+            
+                $this->load->library('session'); 
+               if($this->session->userdata('isLoggedIn')==='1' &&  $this->session->userdata('UserType')!=='Employee'){  
+                    $this->load->model('model_users');
+                    $data['empprojects']= $this->model_users->get_number_of_employees();
+                    //$data['elapsedprojects']=  $this->model_users->get_time_elapsed();
+                    $data['projects']=  $this->model_users->get_team_projects();
+                    $data['num'] = $this->model_users->count_notificiaton();
+                    $this->load->view('middleManagementHome',$data);  
+
+               }else{
+                    $this->login();
+               }      
+        }        
+        public function higherManagementHomepage(){
+            
+            
+                $this->load->library('session'); 
+               if($this->session->userdata('isLoggedIn')==='1' && $this->session->userdata('UserType')==='Higher Management'){ 
+                   //$uname=$this->model_users->get_user_name();
+
+                    $this->load->model('model_users');
+                    $data['teamDetails']=  $this->model_users->get_project_details2();
+                    $data['num'] = $this->model_users->count_notificiaton();
+                    //$data['proj'] = $this->model_users->get_projects();
+                    $this->load->view('higherManagement',$data);
+                    //print_r($data);
+               }else{
+                    $this->login();
+               }   
+		  
+        }
+        public function login_validation(){
+            // Load the model
+          
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('email', 'Email', 'requried|trim|xss_clean|callback_validate_credentials');
+            $this->form_validation->set_rules('password', 'Password', 'requried|md5|trim');
+           
+            if($this->form_validation->run()){
+                redirect('/index.php/main/home_page/', 'refresh');
+            /*    $userType=$this->session->userdata('UserType');
+                if ($userType === 'Higher Management') {      
+                $this->higherManagementHomepage();
+		//$this->load->view('higherManagement');
+                    
+                }  elseif ($userType === 'Line Manager') {
+                //$this->middleManagementHomepage();
+                
+                redirect('/index.php/main/home_page/', 'refresh');
+		//$this->load->view('middleManagementHome');
+                    
+                } elseif($userType === 'Employee') {
+               // $this->empHomepage();                
+                redirect('/index.php/main/home_page/', 'refresh');
+		//$this->load->view('employeeHome'); 
+               // redirect('index.php/main/empHomepage');
+                    
+                } 
+            */
+            
+                
+            }  else {
+                
+                $this->login();
+            }
+            //echo $_POST['email'];
+            //echo $_POST['password'];       
+            
+        }
+
+        public function change_password(){
+            $this->load->model('model_users');
+            
+            if($this->model_users->change_password()){
+
+                $this->home_page();
+            }
+
+            else{
+                echo 'adding failed';
+            }
+
+           // $this->home_page();
+        }
+        /*public function count_notificiaton(){
+            $this->load->model('model_users');
+            $data = $this->model_users->count_notificiaton();
+            $data['num'] = $this->load->view('higherManagement',$data);     
+
+        }*/
+        public function validate_credentials(){
+            $this->load->model('model_users');
+            if($this->model_users->can_log_in()){
+                return TRUE;
+            }  else {
+                $this->form_validation->set_message('validate_credentials','**Incorrect username or password**');
+                return FALSE;
+            }
+        }         
+        public function add_to_pool(){
+            $this->load->model('model_users');
+            //echo 'got values';
+            if($this->model_users->add_to_pool()){
+                $this->viewEmployees();
+            }  else {
+                echo 'Adding Failed';
+            }
+                
+            
+        }
+        public function request_to_get(){            
+            $this->load->model('model_users');
+            $this->model_users->request_to_getemp();
+            $this->employeePool();
+        }
+
+         public function request_to_get1(){            
+            $this->load->model('model_users');
+            $this->model_users->request_to_getemp1();
+            $this->employeePool();
+        }
+        public function home_page(){ 
+                $this->load->library('session'); 
+                $userType=$this->session->userdata('UserType');
+                    if ($userType === 'Higher Management') {      
+                        $this->higherManagementHomepage();
+
+
+                    }  elseif ($userType === 'Line Manager') {
+                        $this->middleManagementHomepage();
+
+
+                    } elseif($userType === 'Employee') {            
+                       //$this->empHomepage($this->session->userdata('UserId'));
+
+                        redirect('/index.php/main/empHomepage/'.$this->session->userdata('UserId'), 'refresh');
+
+                    } 
+            
+        }
+        public function add_to_project(){
+            
+            $this->load->library('session'); 
+
+            $this->load->model('model_users');
+            //echo 'got values';
+            if ($this->session->userdata('UserType')==='Line Manager') {
+                $this->model_users->add_to_project();
+                //$this->viewEmployees();
+                    redirect('/index.php/main/viewEmployees' , 'refresh');
+                
+            }elseif ($this->session->userdata('UserType')==='Higher Management') {
+                $this->model_users->add_to_project_hm();
+                if($this->session->userdata('page')==='viewEmployees'){
+                   // $this->viewEmployees();
+                    redirect('/index.php/main/viewEmployees' , 'refresh');
+                }elseif ($this->session->userdata('page')==='pool') {
+                    //$this->employeePool();
+                    redirect('/index.php/main/employeePool' , 'refresh');
+                }
+            }
+           
+        }        
+        public function higher_Addproject(){
+            $this->load->model('model_users');
+            //echo 'got values';
+            if($this->model_users->higher_Addproject()){
+               // $this->higherManagementHomepage();
+                    redirect('/index.php/main/higherManagementHomepage' , 'refresh');
+            }  else {
+                echo 'Adding Failed';
+            }
+                
+            
+        }
+        public function add_experiance($UserId){
+            $this->load->model('model_users');
+            $this->model_users->add_experiance($UserId);
+            $this->viewEmployees();
+        }
+        public function delete_skill($SkillId){
+             $this->load->library('session'); 
+            //echo $SkillId;
+            $this->load->model('model_users');
+            $this->model_users->delete_skill($SkillId);
+           // $this->empHomepage($this->session->userdata('UserId'));
+        }
+        public function add_skill(){
+            $this->load->model('model_users');
+            $this->model_users->add_skill();
+           // $this->empHomepage();
+        }
+        /*public function generateReport(){
+            //if ($userType === 'Higher Management') {      
+                $this->generateReport();
+
+        }*/
+        public function mm_home($TId){
+
+            $this->load->library('session'); 
+            $this->session->set_userdata('Team',$TId);
+             redirect('/index.php/main/middleManagementHomepage' , 'refresh');
+        }
+
+     public function in_the_pool(){
+            $this->load->model('model_users');
+            $this->model_users->in_the_pool($this->input->post('UserId'));        
+     }
+
+     public function send_email(){
+        $this->load->model('model_users');
+        $this->model_users->send_email($this->input->post('email'));
+        $this->login();        
+     }
+        public function customsearch(){
+            $this->load->library('session');
+            $this->load->view('customsearch');
+        }
+        public function search(){
+               $this->load->model('model_users');
+               $this->model_users->search();
+        }
+        
+
+     
+}

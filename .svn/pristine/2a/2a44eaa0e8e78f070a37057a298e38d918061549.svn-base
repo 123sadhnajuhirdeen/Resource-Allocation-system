@@ -1,0 +1,752 @@
+
+  <script type="text/javascript" async src="<?php echo base_url(); ?>js/ga.js"></script>
+  <script src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/windowstyle.css"/>
+
+  <style>
+
+  .holder{
+	width: 1080px;
+	border: 1px solid #C4CDE0;
+	border-radius: 2px;	
+  /*  margin: 0% 18%;*/
+	height: auto;
+	overflow: hidden;
+  }
+  .search-holder{
+     
+	/*margin: 3px;
+	background: #ECEFF5;
+	border-bottom: 1px solid #C4CDE0*/
+	height: 50px;
+  }
+  .title{
+	font-size: 16px;
+	font-weight: bold;
+	width: 100%;
+	color: #333333;
+	margin-left: 20px;
+  }
+  .fl{
+	float: left;
+	line-height: 15px;
+  }
+  .textbox{
+	/*margin-top: 10px;	*/
+  }
+  .textbox input{
+	border: 1px solid #C4CDE0;
+    outline: medium none;
+    padding: 2px;
+    width: 190px;
+	font-size: 11px;
+	height: 22px;
+  }
+  .developers{
+	 margin:19px -5px;
+  }
+  .developer_holder{
+        width: 535px;
+	min-height: 100px;
+	margin: 5px;
+        padding: 5px;   
+        border-radius: 5px;
+        border: 1px solid #bce8f1;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.075);
+        /*overflow-y: auto;*/
+  }
+  .name{
+	margin-left: 10px;
+  }
+  
+  .name{
+	/*font-size: 12px;
+	font-weight: bold;*/
+    color: #3B5998;
+   /* cursor: pointer;*/
+    text-decoration: none;
+    width: 350px;
+    height: 90px;
+    overflow-y: auto;
+  }
+  
+  .addbtn {
+	/*bottom:0px; */
+	height:20px; 
+	float:right;
+	padding:2px; 
+	margin-right:10px;
+	font-size:10px; 
+  }
+  .addbtn2 {
+	
+        width: 50px;
+	height:25px; 
+	float:right;
+	padding:2px; 
+	margin-right:0px;
+	font-size:12px; 
+}
+table, th, td {
+    border: 5px solid white;
+   
+}
+  </style>
+
+   
+     <div class="search-holder list-group-item">
+	
+         
+
+         <div style=" position: relative; left: 350px; top: 0px; float: left;">
+                        <input type="radio" name="choose" id="Dev" checked="checked"/> Programmers 
+                        <input type="radio" name="choose" id="QA"/> Testers
+                                       
+                    
+	   </div>
+         <div class="textbox fl" style=" left:  400px; position: relative;">
+                    
+                    <input type="text" name="search" class="search se" value="" style="height:30px; font-size:14px; "  placeholder="Search Employees" autocomplete="off">
+                    <button class="btn btn-info" style=" height:28px; 	padding:2px; 	font-size:12px; "  type="button" onClick="location.href = '#textsearch';" >Advanced Search</button>
+
+	   </div>
+	 </div>
+                         
+        <div class="lightbox" id="textsearch">
+            <div class="box"  >
+               <a class="close" href="#">X</a>
+                   <p class="title">Advanced Search</p><br>
+
+                       <form action="viewEmployees" method="post">
+                           <table style="width:100%;">
+                               <tr>
+                                   <td>
+                                       Name:                         
+                                   </td>
+                                   <td>
+                                       <input type="text" name="name"><br>                         
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td>
+                                       Skill:                         
+                                   </td>
+                                   <td>
+                                       <input type="text" name="skill"><br>                          
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td>
+                                       Experience:                        
+                                   </td>
+                                   <td>
+                                       <input type="text" name="experience"><br>                        
+                                   </td>
+                               </tr>
+                               <!--tr>
+                                   <td>
+                                      <input type="radio" name="allocatedto" value="employeepool" checked>Pool                    
+                                   </td>
+                                   <td>
+                                       <input type="radio" name="allocatedto" value="employeeallocation">Allocated                     
+                                   </td>
+                               </tr-->
+                               <br>
+                               <tr>
+                                   <td></td>
+                                   <td>
+                                       <input class="btn btn-info"  style="float:right;" type="submit" value="Search">
+                                   </td>
+                               </tr>
+                               
+                           </table>
+                       </form>
+
+                </div>
+           </div>
+  
+	 <div class="developers" id="Dev_block">
+     
+        
+                <?php
+                //print_r($employees);
+                 foreach ($employees as $row) {
+                      if($row->Type==='Dev'){
+                     echo '<div class="developer_holder fl" id="'.$row->UserName.'" style="display: block;">
+        	<div class="photo fl"><img class="img-thumbnail" src="';
+                     echo base_url();
+                     echo 'images/ProfilePictures/';
+                     echo $row->UserId.'.jpg" width="85" height="85">
+               </div>
+            <div class="name fl">
+                	<b><a href="empHomepage/'.$row->UserId.'">'.$row->UserName.'</a></b>';
+                         if($this->session->userdata('UserType') === 'Line Manager') {
+                             
+ echo' Expire in: '.$row->EndDate;
+
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text'.$row->UserId.'\';" >Add to Pool</button>';
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text2'.$row->UserId.'\';" >Add to Project</button>';
+   }                 
+                        echo '<br>'.$row->Designation.'<br>
+                            <i style="float:left; top:7px; position:relative;">Skills:&nbsp;</i><h5 style="width:350px;">';
+
+// print_r($row->Skills);
+                    foreach ($row->Skills as $skill){
+                         echo '<div class=" label02 fl"><span class=" label label-primary">'.$skill->Skill.'</span></div>';
+                       }                   
+                                          
+                     echo '</h5>
+                        <br><br>';
+                             
+                         echo '
+                             <div class="lightbox" id="text'.$row->UserId.'">
+                                <div class="box" style="height:130px;">
+                                    <a class="close" href="#">X</a>
+                                        <p class="title">Add to Pool</p><br>
+                                            '.$row->UserName.'
+                                           
+                                                <h5>
+                                                    <form action="add_to_pool" method="post" style="float:right;">
+                                                     
+                                                        <input type="hidden" name="UserId" value="'.$row->UserId.'"></input>                                               
+                                                        <input class="btn btn-info addbtn2"  type="submit" value="Add"></input>           
+                                                    </form>
+                                                </h5>
+                                            
+                                     </div>
+                                </div>'; 
+                         echo '
+                             <div   class="lightbox" id="textx'.$row->UserId.'">
+                                <div class="box" style="width:600px;">
+                                    <a class="close" href="#">X</a>
+                                        <p class="title">Add to Project</p><br>
+                                            '.$row->UserName.'
+                                            <div class="content">
+                                                <h5>
+                                                    <form action="add_to_project" method="post">
+                                                    
+                                                        <table style="width:100%;">
+                                                        <tr>
+                                                        <td>
+                                                        Project:
+                                                        </td>
+                                                        <td >
+                                                        <input style="width:100%;" list="projects" name="project" placeholder="Select Project" required>
+                                                            <datalist id="projects">';
+                                                                   //  print_r($projects);
+                                                                     foreach ($projects as $row2) {
+                                                                         echo '<option value="'.$row2->ProjectName.'">';
+
+                                                                     }
+
+                                                                      echo '</datalist></input>
+                                                            </td>
+                                                            <td>
+                                                                Role:
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="Role" style="width:100%;" required></input>
+
+                                                            </td>
+                                                            </tr>
+                                                            <tr>
+                                                            ';
+                                                                 if($this->session->userdata('UserType') === 'Line Manager'){       
+                                                                      echo  '
+                                                            <td>
+                                                                        Contribution:
+                                                            </td>
+                                                            <td>                                                                        
+                                                                        <input type="text" class="contribution" name="contribution" style="width:40px;" required >&nbsp;%</input>
+                                                            </td>
+                                                            <td>
+                                                                        ';
+                                                                 } elseif ($this->session->userdata('UserType') === 'Higher Management') {
+                                                                     echo '
+                                                            <td>
+                                                                         To:
+                                                            </td>
+                                                            <td>
+                                                                         <input style="width:100%;" type="date" name="todate"  required></input>
+                                                            </td>
+                                                            <td>';
+                                                                 
+                                                                 }   
+                                                                      echo  '
+                                                                        <input type="hidden" name="UserId" value="'.$row->UserId.'"></input> 
+                                                                            
+                                                            </td>
+                                                            
+                        
+                                                            </tr>';
+                                                                 if($this->session->userdata('UserType') === 'Line Manager'){ 
+                                                                      foreach ($row->Projects as $row2) {
+                                                                          echo '<tr><td>'; 
+                                                                          echo $row2->ProjectName.':</td><td><input class="contribution" style="width:40px;" type="text" name="'.$row2->ProjectAllocId.'"  required placeholder="'.$row2->Contribution;
+                                                                          echo '">&nbsp;%</td>';
+                                                                      }
+                                                                 }
+                                                                      
+                                                      echo'   <td></td><td></td><td></td>
+                                                            <td>
+                                                                        <input class="btn btn-info addbtn2"  type="submit" value="add"></input>
+                                                                        
+                                                            </td></tr>
+                                                          </table>
+                                                    </form>
+                                                </h5>
+                                            </div>
+                                    </div>
+                                </div>';
+                      
+                         
+                         
+              
+                        echo '<div style="width:300px; height:auto; position:retive; top:15px;">';
+                         echo '<i style="float:left; top:-5px;">Projects:&nbsp;</i>';
+                     foreach ($row->Projects as $row1){
+                         echo $row1->ProjectName.', ';
+                         
+                     }
+                     if($this->session->userdata('UserType') === 'Higher Management' && $row->In_Pool==='1'){
+                         echo '***Employee In Pool***';
+                     }
+                     
+ echo '</div></div>
+                         
+<div class="btn-group addbtn fl">
+   <button type="button" class="btn btn-success dropdown-toggle btn-xs" data-toggle="dropdown">
+      Edit
+      <span class="caret"></span>
+   </button>
+    <ul class="dropdown-menu" role="menu">';
+ 
+        if($row->In_Pool!=='1'){
+             echo '<li><a href="viewEmployees#text'.$row->UserId.'">Add to Pool</a></li>';
+        }
+        if($this->session->userdata('UserType') === 'Higher Management'){
+            echo '<li><a href="viewEmployees#textx'.$row->UserId.'">Add to Project</a></li>';
+        }else{
+            echo '<li><a class="iframe" href="add_to_project_contribution/'.$row->UserId.'">Add to project</a></li>';
+        }        
+        echo '
+     </ul>
+   
+</div>
+                                     
+
+</div>';
+ 
+     //            }else{
+      //         echo '</div></div>';
+      //               }
+                 } 
+                 
+                 }
+                
+                
+                ?>
+             <div class=" developer_holder fl" style=" display: block; width: 1080px; min-height: 30px; cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="#collapseall">
+                 <div style=" color: #337AB7; left: 460px; position: relative;"><strong>Show All Employees</strong></div>
+             </div>               
+             <div id="collapseall" class="panel-collapse collapse out">
+ 
+
+     
+        
+                <?php
+                //print_r($allemployees);
+                 foreach ($allemployees as $row) {
+                      if($row->Type==='Dev'){
+                     echo '<div class="developer_holder fl" id="'.$row->UserName.'" style="display: block;">
+        	<div class="photo fl"><img class="img-thumbnail" src="';
+                     echo base_url();
+                     echo 'images/ProfilePictures/';
+                     echo $row->UserId.'.jpg" width="85" height="85">
+               </div>
+            <div class="name fl">
+                	<b><a href="empHomepage/'.$row->UserId.'">'.$row->UserName.'</a></b>';
+                         if($this->session->userdata('UserType') === 'Line Manager') {
+                             
+
+
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text'.$row->UserId.'\';" >Add to Pool</button>';
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text2'.$row->UserId.'\';" >Add to Project</button>';
+   }                 
+                        echo '<br>'.$row->Designation.'<br>
+                            <i style="float:left; top:7px; position:relative;">Skills:&nbsp;</i><h5 style="width:350px;">';
+
+// print_r($row->Skills);
+                    foreach ($row->Skills as $skill){
+                         echo '<div class=" label02 fl"><span class=" label label-primary">'.$skill->Skill.'</span></div>';
+                       }                   
+                                          
+                     echo '</h5>
+                        <br><br>';
+                             
+
+                         
+                      
+                         
+                         
+              
+                     //print_r($row->Projects);
+         //            if($this->session->userdata('UserType') === 'Line Manager') {
+                         echo '<i style="float:left;">Projects:&nbsp;</i>';
+                     foreach ($row->Projects as $row1){
+                         echo $row1->ProjectName.', ';
+                         
+                     }
+                     if($this->session->userdata('UserType') === 'Higher Management' && $row->In_Pool==='1'){
+                         echo '***Employee In Pool***';
+                     }
+                     
+ echo '</div>
+                         
+
+                                     
+
+</div>';
+ 
+     //            }else{
+      //         echo '</div></div>';
+      //               }
+                 } 
+                 
+                 }
+                
+                
+                ?>
+             
+             
+             
+             
+         </div>
+         </div>
+             
+             
+  <div class="developers" id="QA_block" style="display: none;">
+     
+        
+                <?php
+                 foreach ($employees as $row) {
+                      if($row->Type==='QA'){
+                     echo '<div class="developer_holder fl" id="'.$row->UserName.'" style="display: block;">
+        	<div class="photo fl"><img class="img-thumbnail" src="';
+                     echo base_url();
+                     echo 'images/ProfilePictures/';
+                     echo $row->UserId.'.jpg" width="85" height="85"></div>
+            <div class="name fl">
+                	<b><a href="empHomepage/'.$row->UserId.'">'.$row->UserName.'</a></b>' ;
+                         if($this->session->userdata('UserType') === 'Line Manager') { 
+                              echo' Expire in: '.$row->EndDate;
+
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text'.$row->UserId.'\';" >Add to Pool</button>';
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text2'.$row->UserId.'\';" >Add to Project</button>';
+   }                 
+                        echo '<br>'.$row->Designation.'<br>
+                            <i style="float:left; top:7px; position:relative;">Skills:&nbsp;</i><h5 style="width:350px;">';
+
+// print_r($row->Skills);
+                    foreach ($row->Skills as $skill){
+                         echo '<div class=" label02 fl"><span class=" label label-primary">'.$skill->Skill.'</span></div>';
+                               }                   
+                                          
+                     echo '</h5>
+                            <br><br> ';              
+                         echo '
+                             <div class="lightbox" id="text'.$row->UserId.'">
+                                <div class="box" style="height:130px;">
+                                    <a class="close" href="#">X</a>
+                                        <p class="title">Add to Pool</p><br>
+                                            '.$row->UserName.'
+                                           
+                                            <h5>
+                                            <form action="add_to_pool" method="post">
+                                            
+                                                <input type="hidden" name="UserId" value="'.$row->UserId.'"></input>                                               
+                                                <input class="btn btn-info addbtn2"  type="submit" value="Add"></input>           
+                                            </form>
+                                            </h5>
+                                            
+                                </div>
+                                </div>';
+                         echo '
+                             <div class="lightbox" id="textx'.$row->UserId.'">
+                                <div class="box">
+                                    <a class="close" href="#">X</a>
+                                        <p class="title">Add to Project</p><br>
+                                            '.$row->UserName.'
+                                            <div class="content">
+                                                <h5>
+                                                    <form action="add_to_project" method="post">
+                                                      
+                                                        <table style="width:100%;">
+                                                        <tr>
+                                                        <td>
+                                                        Project:
+                                                        </td>
+                                                        <td >
+                                                        <input list="projects" name="project" placeholder="Select Project" required>
+                                                            <datalist id="projects">';
+                                                                   //  print_r($projects);
+                                                                     foreach ($projects as $row2) {
+                                                                         echo '<option value="'.$row2->ProjectName.'">';
+
+                                                                     }
+
+                                                                      echo '</datalist></input>
+                                                            </td>
+                                                            <td>
+                                                                Role:
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="Role" style="width:100%;" required></input>
+
+                                                            </td>
+                                                            </tr>
+                                                            <tr>
+                                                            ';
+                                                                 if($this->session->userdata('UserType') === 'Line Manager'){       
+                                                                      echo  '
+                                                            <td>
+                                                                        Contribution:
+                                                            </td>
+                                                            <td>                                                                        
+                                                                        <input type="text" name="contribution" style="width:100%;" required placeholder="%"></input>
+                                                            </td>
+                                                            <td>
+                                                                        ';
+                                                                 } elseif ($this->session->userdata('UserType') === 'Higher Management') {
+                                                                     echo '
+                                                            <td>
+                                                                         To:
+                                                            </td>
+                                                            <td>
+                                                                         <input style="width:100%;" type="date" name="todate"  required></input>
+                                                            </td>
+                                                            <td>';
+                                                                 
+                                                                 }   
+                                                                      echo  '
+                                                                        <input type="hidden" name="UserId" value="'.$row->UserId.'"></input> 
+                                                                            
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                        <input class="btn btn-info addbtn2"  type="submit" value="add"></input>
+                                                                        
+                                                            </td>
+                                                            </tr>
+                                                            </table>  
+                                                    </form>
+                                                </h5>
+                                            </div>
+                                    </div>
+                                </div>';
+                                                                      
+                         
+                         
+
+                     
+                     //print_r($row->Projects);
+            //         if($this->session->userdata('UserType') === 'Line Manager') {
+                         echo '<i style="float:left;">Projects:&nbsp;</i>';
+                            foreach ($row->Projects as $row1){
+                                echo $row1->ProjectName.', ';
+                            }
+                            if($this->session->userdata('UserType') === 'Higher Management' && $row->In_Pool==='1'){
+                                     echo '***Employee In Pool***';
+                            }
+                     
+                     
+ echo ' </div>
+     
+                                <div class="btn-group addbtn fl">
+                                    <button type="button" class="btn btn-success dropdown-toggle btn-xs" 
+                                       data-toggle="dropdown">
+                                       Edit<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">'; 
+        if($row->In_Pool!=='1'){
+             echo '<li><a href="viewEmployees#text'.$row->UserId.'">Add to Pool</a></li>';
+        }
+        if($this->session->userdata('UserType') === 'Higher Management'){
+            echo '<li><a href="viewEmployees#textx'.$row->UserId.'">Add to Project</a></li>';
+        }else{
+            echo '<li><a class="iframe" href="add_to_project_contribution/'.$row->UserId.'">Add to project</a></li>';
+        }        
+        echo '
+                                    </ul>
+                                 </div>
+
+
+
+                     </div>';          
+           //          }else{               echo '</div></div>';
+           //          }
+ 
+ 
+                 } 
+                 
+                 }
+                
+                
+                ?>
+             <div class=" developer_holder fl" style=" display: block; width: 1080px; min-height: 30px; cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="#collapseallxx">
+                 <div style=" color: #337AB7; left: 460px; position: relative;"><strong>Show All Employees</strong></div>
+             </div>
+        <div id="collapseallxx" class="panel-collapse collapse out">
+                  <?php
+                 foreach ($allemployees as $row) {
+                      if($row->Type==='QA'){
+                     echo '<div class="developer_holder fl" id="'.$row->UserName.'" style="display: block;">
+        	<div class="photo fl"><img class="img-thumbnail" src="';
+                     echo base_url();
+                     echo 'images/ProfilePictures/';
+                     echo $row->UserId.'.jpg" width="85" height="85"></div>
+            <div class="name fl">
+                	<b><a href="empHomepage/'.$row->UserId.'">'.$row->UserName.'</a></b>' ;
+                         if($this->session->userdata('UserType') === 'Line Manager') { 
+                    
+
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text'.$row->UserId.'\';" >Add to Pool</button>';
+//echo '<button class="btn btn-info addbtn"  type="button" onClick="location.href = \'#text2'.$row->UserId.'\';" >Add to Project</button>';
+   }                 
+                        echo '<br>'.$row->Designation.'<br>
+                            <i style="float:left; top:7px; position:relative;">Skills:&nbsp;</i><h5 style="width:350px;">';
+
+// print_r($row->Skills);
+                    foreach ($row->Skills as $skill){
+                         echo '<div class=" label02 fl"><span class=" label label-primary">'.$skill->Skill.'</span></div>';
+                               }                   
+                                          
+                     echo '</h5>
+                            <br><br> ';              
+               
+                                                                      
+                         
+                         
+
+                     
+                     //print_r($row->Projects);
+            //         if($this->session->userdata('UserType') === 'Line Manager') {
+                         echo '<i style="float:left;">Projects:&nbsp;</i>';
+                            foreach ($row->Projects as $row1){
+                                echo $row1->ProjectName.', ';
+                            }
+                            if($this->session->userdata('UserType') === 'Higher Management' && $row->In_Pool==='1'){
+                                     echo '***Employee In Pool***';
+                            }
+                     
+                     
+ echo ' </div>
+     
+
+
+
+                     </div>
+                    ';          
+           //          }else{               echo '</div></div>';
+           //          }
+ 
+ 
+                 } 
+                 
+                 }
+                
+                
+                ?>
+             
+             
+
+        </div>           
+             
+
+        </div>
+  
+
+ <!-- start of all employees -->   
+ 
+
+ 
+  <!-- end of all employees -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+
+$('#QA').click(function()
+{
+
+$('#Dev_block').hide();
+$('#QA_block').show();
+});
+
+$('#Dev').click(function()
+{
+
+$('#QA_block').hide();
+$('#Dev_block').show();
+});
+
+$('#All').click(function()
+{
+
+$('#QA_block').show();
+$('#Dev_block').show();
+});
+
+});
+</script> 
+ 
+
+<script>
+$(document).ready(function(){
+	$(".search").keyup(function(){
+		var str = $(".search").val();
+		$(".developers .developer_holder").each(function(index){
+			if($(this).attr("id")){
+				if(!$(this).attr("id").match(new RegExp(str, "i"))){
+					$(this).fadeOut("fast");
+				}else{
+					$(this).fadeIn("slow");
+				}
+			}
+		});		
+	});
+});
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19096935-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<?php echo base_url(); ?>js/jquery-1.9.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/dropdownjs/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/dropdownjs/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="<?php echo base_url(); ?>js/dropdownjs/ie10-viewport-bug-workaround.js"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/colorbox.css" />
+		<script src="<?php echo base_url(); ?>js/jquery-1.10.1.min.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.colorbox.js"></script>
+                		<script>
+			$(document).ready(function(){
+				//Examples of how to assign the Colorbox event to elements
+				$(".iframe").colorbox({iframe:true, width:"850px", height:"350px"});
+				
+				
+				//Example of preserving a JavaScript event for inline calls.
+				$("#click").click(function(){ 
+					$('#click').css({"background-color":"#000", "color":"#000", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+					return false;
+				});
+			});
+		</script>

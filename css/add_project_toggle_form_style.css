@@ -1,0 +1,78 @@
+/* =The style for the lab
+-------------------------------------------------------------- */
+nav#nav-container {
+    border-top:solid 1px rgb(220,220,220);
+    border-bottom:solid 1px rgb(220,220,220);
+    margin-bottom:18px;
+   	line-height:40px;
+}
+
+nav#links {
+    width:724px;
+    float:left;
+}
+
+nav#links ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+#links ul li {
+    margin:0 12px;
+    padding:0;
+    float:left;
+    text-align:center;
+}
+
+#links ul li a {
+    display:block;
+    padding:0 12px;
+}
+
+
+nav#login {
+    width:300px;
+    float:left;
+    position:relative;
+}
+
+#login p {
+    margin:0;
+    padding-left:24px;
+    cursor:pointer;
+    background-image:url('../img/open.png');
+    background-position:left;
+    background-repeat:no-repeat;
+}
+
+#login p.close {
+    background-image:url('../img/close.png');
+}
+
+#login-form {
+    position:absolute;
+    z-index:999;
+    background-color:#fff;
+    border:solid 1px rgb(220,220,220);
+    padding:12px;
+    width:300px;
+    box-shadow:1px 1px 4px rgb(220,220,220);
+    top:40px;
+    left:0;
+    display:none;
+}
+
+#login-form label {
+    display:block;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    display:block;
+}
+
+#login-form input,
+#login-form label {
+    margin-bottom:4px;
+}

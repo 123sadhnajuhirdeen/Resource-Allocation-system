@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notifications</title>
+	<?php require_once('header.php'); ?>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <!-- link href="css/higher_manage.css" rel="stylesheet" type="text/css" -->
+  <link href="css/theme.css" rel="stylesheet" type="text/css">
+
+</head>	
+<body>
+    <div class="main">
+        <div class="mtop">
+            <div class="mbar">
+        	<button class="btn btn-success" style="margin:8px; margin-right: 0px; "  type="button" >Home</button>
+        	<button class="btn btn-default"  type="button" onClick="location.href = 'employeePool';">Employee Pool </button>
+        	<button class="btn btn-default" type="button" onClick="location.href = 'viewEmployees';">Employees </button>
+        	<button class="btn btn-info"  type="button" onClick="location.href = 'requestHandling';">Notifications <span class="badge">4</span></button>
+    		<div class="lobtn">
+    		<button class="btn btn-default" type="button" onClick="location.href = 'resetPassword';">Change Password</button>
+                <button class="userPicture btn btn-default" type="button" onClick="location.href = 'empHomepage';"><img src="<?php echo base_url(); ?>images/ProfilePictures/<?php echo $this->session->userdata('UserId'); ?>.jpg" alt="profilePicture" width="22" height="22" style="float:left;"><?php echo $this->session->userdata('UserName'); ?></button>
+        	<button class="btn btn-default" type="button" onClick="location.href = 'logout';" ><img src="<?php echo base_url(); ?>images/powerbtn.png" width="12" height="15" /> Logout</button> </div>
+            	
+                <!-- here notifications are coming -->
+        </div>  <!-- end of mbar -->
+        
+       		<div class="panel panel-success" style="position:relative; width:1100px">
+				<div class="panel-heading" >
+				<h3 class="panel-title">Notifications </h3>
+				</div>
+				<div class="panel-body">
+                                             
+                                <div class="alert alert-info" role="alert" >
+                                    <strong> <a href="url">Wasana Wicramasinghe </a>is requested by <a href="url">S.D.Ranjan</a>, for VBS3 project Fires.</strong><br />
+                                    From 2014/12/12 to 2015/02/12
+                                    <div align="right" style=" float:right; width: 300px; position: relative; top:-17px;">
+                                    		<span class="relativetime" title="2014-03-22 14:59:53Z">Nov 25 at 14:59</span>
+                                        <button class="btn btn-warning" type="button" >Accept</button>
+										<button class="btn btn-danger" type="button" >Reject</button>
+                                    </div>
+                                    <!--div align="right">
+                                    	
+                                    </div -->
+                                </div>
+                                
+                                <div class="alert alert-info" role="alert" >
+                                    <strong><a href="url">Dilhani Ranaweera </a> is requested by <a href="url">S.D.Ranjan</a>, for VBS3 project Fires.</strong><br />
+                                   	From 2014/12/12 to 2015/02/12
+                                    
+                                    <div align="right" style=" float:right; width: 300px; position: relative; top:-17px;">
+                                    		<span class="relativetime" title="2014-03-22 14:59:53Z">Nov 28 at 14:59</span>
+                                        <button class="btn btn-warning" type="button" >Accept</button>
+										<button class="btn btn-danger" type="button" >Reject</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="alert alert-info" role="alert" >
+                                    <strong><a href="url">Dinesh chandradasa</a> is requested by <a href="url">S.D.Ranjan</a>, for IWS project Fires.</strong><br />
+                                    From 2014/12/12 to 2015/02/12
+                                    <div align="right" style=" float:right; width: 300px; position: relative; top:-17px;">
+                                    		<span class="relativetime" title="2014-03-22 14:59:53Z">Nov 15 at 14:59</span>
+                                        <button class="btn btn-warning" type="button" >Accept</button>
+										<button class="btn btn-danger" type="button" >Reject</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="alert alert-info" role="alert" >
+                                    <strong><a href="url">Charinda Nanayakkara</a> is requested by <a href="url">S.D.Ranjan</a>, for VBS2 project Fires.</strong><br />
+                                    From 2014/12/12 to 2015/02/12
+                                    <div align="right" style=" float:right; width: 300px; position: relative; top:-17px;">
+                                    		<span class="relativetime" title="2014-03-22 14:59:53Z">Nov 15 at 14:59</span>
+                                        <button class="btn btn-warning" type="button" >Accept</button>
+										<button class="btn btn-danger" type="button" >Reject</button>
+                                    </div>
+                                </div>
+            	</div>
+           </div>      
+             
+        <?php require_once('footer.php');?> 
+    </div>
+</body>
+</html>
